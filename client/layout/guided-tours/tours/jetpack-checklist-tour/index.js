@@ -7,14 +7,7 @@ import React, { Fragment } from 'react';
  * Internal dependencies
  */
 import meta from './meta';
-import {
-	ButtonRow,
-	Continue,
-	makeTour,
-	Quit,
-	Step,
-	Tour,
-} from 'layout/guided-tours/config-elements';
+import { ButtonRow, makeTour, Next, Quit, Step, Tour } from 'layout/guided-tours/config-elements';
 
 export const JetpackChecklistTour = makeTour(
 	<Tour { ...meta }>
@@ -28,9 +21,7 @@ export const JetpackChecklistTour = makeTour(
 						) }
 					</p>
 					<ButtonRow>
-						<Continue target=".plugin-item-jetpack .form-toggle__switch" step="finish" click>
-							{ translate( 'Got it' ) }
-						</Continue>
+						<Next step="finish">{ translate( 'Got it' ) }</Next>
 					</ButtonRow>
 				</Fragment>
 			) }
