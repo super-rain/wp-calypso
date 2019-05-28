@@ -18,7 +18,7 @@ import {
 
 export const JetpackChecklistTour = makeTour(
 	<Tour { ...meta }>
-		<Step arrow="bottom-left" name="init" placement="above" target=".wp-admin">
+		<Step arrow="bottom-left" name="init" placement="above" target=".checklist">
 			{ ( { translate } ) => (
 				<Fragment>
 					<p>
