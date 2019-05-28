@@ -9,11 +9,19 @@ import React, { Component } from 'react';
 /**
  * Internal dependencies
  */
+import { isDesktop } from 'lib/viewport';
 import { preventWidows } from 'lib/formatting';
+import { requestGuidedTour } from 'state/ui/guided-tours/actions';
 import Button from 'components/button';
 import Card from 'components/card';
 
 export class ThankYouCard extends Component {
+	startChecklistTour = () => {
+		if ( isDesktop() ) {
+			this.props.requestGuidedTour( 'jetpackChecklistTour' );
+		}
+	};
+
 	render() {
 		const {
 			children,
@@ -51,13 +59,19 @@ export class ThankYouCard extends Component {
 						</p>
 					) }
 					{ showContinueButton && (
-						<Button primary href={ `/plans/my-plan/${ siteSlug }` }>
+						<Button
+							primary
+							href={ `/plans/my-plan/${ siteSlug }` }
+							onClick={ this.startChecklistTour }
+						>
 							{ translate( 'Continue' ) }
 						</Button>
 					) }
 					{ showHideMessage && (
 						<p>
-							<a href={ `/plans/my-plan/${ siteSlug }` }>{ translate( 'Hide message' ) }</a>
+							<a href={ `/plans/my-plan/${ siteSlug }` } onClick={ this.startChecklistTour }>
+								{ translate( 'Hide message' ) }
+							</a>
 						</p>
 					) }
 				</div>
@@ -66,8 +80,13 @@ export class ThankYouCard extends Component {
 	}
 }
 
-export default connect( state => {
-	return {
-		siteSlug: getSelectedSiteSlug( state ),
-	};
-} )( localize( ThankYouCard ) );
+export default connect(
+	state => {
+		return {
+			siteSlug: getSelectedSiteSlug( state ),
+		};
+	},
+	{
+		requestGuidedTour,
+	}
+)( localize( ThankYouCard ) );
