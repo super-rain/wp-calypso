@@ -1,4 +1,4 @@
 export default {
-	name: 'jetpackChecklist',
+	name: 'jetpackChecklistTour',
 	version: '20190527',
 };
