@@ -40,6 +40,7 @@ import { isEnabled } from 'config';
 import QueryJetpackPlugins from 'components/data/query-jetpack-plugins';
 import PaidPlanThankYouCard from './current-plan-thank-you-card/paid-plan-thank-you-card';
 import FreePlanThankYouCard from './current-plan-thank-you-card/free-plan-thank-you-card';
+import { requestGuidedTour } from 'state/ui/guided-tours/actions';
 
 /**
  * Style dependencies
@@ -113,6 +114,10 @@ class CurrentPlan extends Component {
 		) : (
 			<PaidPlanThankYouCard />
 		);
+
+		if ( ! showThankYou ) {
+			this.props.requestGuidedTour( 'jetpackChecklistTour' );
+		}
 
 		const planConstObj = getPlan( currentPlanSlug ),
 			planFeaturesHeader = translate( '%(planName)s plan features', {
@@ -195,27 +200,30 @@ class CurrentPlan extends Component {
 	}
 }
 
-export default connect( ( state, { requestThankYou } ) => {
-	const selectedSite = getSelectedSite( state );
-	const selectedSiteId = getSelectedSiteId( state );
-	const domains = getDecoratedSiteDomains( state, selectedSiteId );
+export default connect(
+	( state, { requestThankYou } ) => {
+		const selectedSite = getSelectedSite( state );
+		const selectedSiteId = getSelectedSiteId( state );
+		const domains = getDecoratedSiteDomains( state, selectedSiteId );
 
-	const isJetpack = isJetpackSite( state, selectedSiteId );
-	const isAutomatedTransfer = isSiteAutomatedTransfer( state, selectedSiteId );
+		const isJetpack = isJetpackSite( state, selectedSiteId );
+		const isAutomatedTransfer = isSiteAutomatedTransfer( state, selectedSiteId );
 
-	const isJetpackNotAtomic = false === isAutomatedTransfer && isJetpack;
+		const isJetpackNotAtomic = false === isAutomatedTransfer && isJetpack;
 
-	return {
-		selectedSite,
-		selectedSiteId,
-		domains,
-		currentPlan: getCurrentPlan( state, selectedSiteId ),
-		isExpiring: isCurrentPlanExpiring( state, selectedSiteId ),
-		isFreePlan: isSiteOnFreePlan( state, selectedSiteId ),
-		shouldShowDomainWarnings: ! isJetpack || isAutomatedTransfer,
-		hasDomainsLoaded: !! domains,
-		isRequestingSitePlans: isRequestingSitePlans( state, selectedSiteId ),
-		showJetpackChecklist: isJetpackNotAtomic && isEnabled( 'jetpack/checklist' ),
-		showThankYou: requestThankYou && isJetpackNotAtomic && isEnabled( 'jetpack/checklist' ),
-	};
-} )( localize( CurrentPlan ) );
+		return {
+			selectedSite,
+			selectedSiteId,
+			domains,
+			currentPlan: getCurrentPlan( state, selectedSiteId ),
+			isExpiring: isCurrentPlanExpiring( state, selectedSiteId ),
+			isFreePlan: isSiteOnFreePlan( state, selectedSiteId ),
+			shouldShowDomainWarnings: ! isJetpack || isAutomatedTransfer,
+			hasDomainsLoaded: !! domains,
+			isRequestingSitePlans: isRequestingSitePlans( state, selectedSiteId ),
+			showJetpackChecklist: isJetpackNotAtomic && isEnabled( 'jetpack/checklist' ),
+			showThankYou: requestThankYou && isJetpackNotAtomic && isEnabled( 'jetpack/checklist' ),
+		};
+	},
+	{ requestGuidedTour }
+)( localize( CurrentPlan ) );

@@ -18,7 +18,7 @@ import Card from 'components/card';
 export class ThankYouCard extends Component {
 	startChecklistTour = () => {
 		if ( isDesktop() ) {
-			this.props.requestGuidedTour( 'jetpackChecklistTour' );
+			//this.props.requestGuidedTour( 'jetpackChecklistTour' );
 		}
 	};
 
