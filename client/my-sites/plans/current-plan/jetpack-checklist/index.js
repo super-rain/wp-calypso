@@ -91,7 +91,6 @@ class JetpackChecklist extends PureComponent {
 				<JetpackChecklistHeader isPaidPlan={ isPaidPlan } />
 
 				<Checklist
-					data-tip-target="jetpack-checklist"
 					isPlaceholder={ ! taskStatuses }
 					progressText={ translate( 'Your Jetpack setup progress' ) }
 				>

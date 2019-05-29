@@ -11,7 +11,7 @@ import { ButtonRow, makeTour, Next, Quit, Step, Tour } from 'layout/guided-tours
 
 export const JetpackChecklistTour = makeTour(
 	<Tour { ...meta }>
-		<Step arrow="bottom-left" name="init" placement="above" target="jetpack-checklist">
+		<Step arrow="bottom-left" name="init" placement="above" target=".checklist">
 			{ ( { translate } ) => (
 				<Fragment>
 					<p>
@@ -31,7 +31,7 @@ export const JetpackChecklistTour = makeTour(
 			arrow="bottom-left"
 			name="finish"
 			placement="above"
-			target="jetpack-checklist-wpadmin-link"
+			target=".jetpack-checklist__footer .button"
 		>
 			{ ( { translate } ) => (
 				<Fragment>
