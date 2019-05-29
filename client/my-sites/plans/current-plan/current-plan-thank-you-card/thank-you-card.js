@@ -81,11 +81,9 @@ export class ThankYouCard extends Component {
 }
 
 export default connect(
-	state => {
-		return {
-			siteSlug: getSelectedSiteSlug( state ),
-		};
-	},
+	state => ( {
+		siteSlug: getSelectedSiteSlug( state ),
+	} ),
 	{
 		requestGuidedTour,
 	}
