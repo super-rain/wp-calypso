@@ -24,7 +24,7 @@ export const JetpackChecklistTour = makeTour(
 				<Fragment>
 					<p>
 						{ translate(
-							"This is your security checklist that'll help you quickly setup Jetpack. " +
+							"This is your security checklist that'll help you quickly set up Jetpack. " +
 								'Pick and choose the features that you want.'
 						) }
 					</p>
