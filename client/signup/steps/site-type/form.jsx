@@ -70,9 +70,9 @@ class SiteTypeForm extends Component {
 						data-e2e-title={ siteTypeProperties.slug }
 						onClick={ this.handleSubmit.bind( this, siteTypeProperties.slug ) }
 					>
-						<strong className="site-type__option-label">{ siteTypeProperties.label }</strong>
+						<strong className="site-type__option-label">{ siteTypeProperties.copy.label }</strong>
 						<span className="site-type__option-description">
-							{ siteTypeProperties.description }
+							{ siteTypeProperties.copy.description }
 						</span>
 					</Card>
 				) ) }

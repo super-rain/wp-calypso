@@ -26,6 +26,7 @@ import { getSiteStyle } from 'state/signup/steps/site-style/selectors';
 import { getSiteType } from 'state/signup/steps/site-type/selectors';
 import { getSiteStyleOptions } from 'lib/signup/site-styles';
 import { recordTracksEvent } from 'state/analytics/actions';
+import { getCopyForSiteType } from 'lib/signup/site-type';
 
 /**
  * Style dependencies
@@ -129,8 +130,11 @@ export class SiteStyleStep extends Component {
 			translate,
 		} = this.props;
 		const headerText = translate( 'Choose a style' );
-		const subHeaderText = translate(
-			"Choose a style for your site's theme. Don't worry, you can always change it later."
+		const subHeaderText = getCopyForSiteType(
+			{
+				/* Fallback to the default for this one, for now */
+			},
+			'siteStyleSubheader'
 		);
 
 		return (

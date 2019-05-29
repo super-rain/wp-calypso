@@ -15,7 +15,7 @@ import SignupActions from 'lib/signup/actions';
 import SiteTopicForm from './form';
 import StepWrapper from 'signup/step-wrapper';
 import { getSiteType } from 'state/signup/steps/site-type/selectors';
-import { getSiteTypePropertyValue } from 'lib/signup/site-type';
+import { getCopyForSiteType } from 'lib/signup/site-type';
 import { getSiteVerticalIsUserInput } from 'state/signup/steps/site-vertical/selectors';
 import { submitSiteVertical } from 'state/signup/steps/site-vertical/actions';
 
@@ -44,8 +44,7 @@ class SiteTopicStep extends Component {
 
 	getTextFromSiteType() {
 		// once we have more granular copies per segments, these should only be used for the default case.
-		const headerText =
-			getSiteTypePropertyValue( 'slug', this.props.siteType, 'siteTopicHeader' ) || '';
+		const headerText = getCopyForSiteType( { slug: this.props.siteType }, 'siteTopicHeader' );
 		const commonSubHeaderText = this.props.translate(
 			'This information helps us build the best site for your needs.'
 		);

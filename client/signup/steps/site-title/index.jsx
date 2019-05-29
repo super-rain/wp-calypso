@@ -20,7 +20,7 @@ import FormLabel from 'components/forms/form-label';
 import FormFieldset from 'components/forms/form-fieldset';
 import InfoPopover from 'components/info-popover';
 import QueryVerticals from 'components/data/query-verticals';
-import { getSiteTypePropertyValue } from 'lib/signup/site-type';
+import { getCopyForSiteType } from 'lib/signup/site-type';
 import { recordTracksEvent } from 'state/analytics/actions';
 import { setSiteTitle } from 'state/signup/steps/site-title/actions';
 import { getSiteTitle } from 'state/signup/steps/site-title/selectors';
@@ -88,12 +88,12 @@ class SiteTitleStep extends Component {
 			siteVerticalName,
 			translate,
 		} = this.props;
-		const fieldLabel = getSiteTypePropertyValue( 'slug', siteType, 'siteTitleLabel' ) || '';
-		const fieldPlaceholder =
-			getSiteTypePropertyValue( 'slug', siteType, 'siteTitlePlaceholder' ) || '';
+		const fieldLabel = getCopyForSiteType( { slug: siteType }, 'siteTitleLabel' );
+		const fieldPlaceholder = getCopyForSiteType( { slug: siteType }, 'siteTitlePlaceholder' );
 		const fieldDescription = translate(
 			"We'll use this as your site title. Don't worry, you can change this later."
 		);
+
 		return (
 			<div className="site-title__wrapper">
 				{ shouldFetchVerticalData && <QueryVerticals searchTerm={ siteVerticalName } /> }
@@ -137,13 +137,12 @@ class SiteTitleStep extends Component {
 			positionInFlow,
 			showSiteMockups,
 			signupProgress,
+			siteType,
 			stepName,
-			translate,
 		} = this.props;
-		const headerText = translate( "Tell us your site's name" );
-		const subHeaderText = translate(
-			'This will appear at the top of your site and can be changed at anytime.'
-		);
+		const headerText = getCopyForSiteType( { slug: siteType }, 'siteTitleLabel' );
+		const subHeaderText = getCopyForSiteType( { slug: siteType }, 'siteTitleSubheader' );
+
 		return (
 			<div>
 				<StepWrapper
